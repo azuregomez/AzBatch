@@ -1,5 +1,5 @@
 # Local path where the pool solution files are saved
-$path = "C:\projects\github\azbatchazfiles\azbatchazfiles\"
+$path = "C:\projects\github\azbatch\"
 $paramfile = $path + "batchpool.parameters.json"
 $params = get-content $paramfile | ConvertFrom-Json
 $prefix = $params.deploymentPrefix

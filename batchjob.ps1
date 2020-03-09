@@ -1,5 +1,5 @@
 # Local path where the solution files are saved
-$path = "C:\projects\github\azbatchazfiles\azbatchazfiles\"
+$path = "C:\projects\github\azbatch\"
 $paramfile = $path + "batchjob.parameters.json"
 $params = get-content $paramfile | ConvertFrom-Json
 $prefix = $params.deploymentPrefix
