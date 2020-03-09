@@ -62,7 +62,7 @@ https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-vari
 As it is provided: 
 <ul>
 <li>The pool parameter file creates a pool with 2 nodes. This is configurable.
-<li>The job parameter file is configured to do the following tasks and dependencies:
+<li>The job parameter file is configured to do the following tasks and dependencies:<br/>
 <img src="https://storagegomez.blob.core.windows.net/public/images/tasks.jpg"/>
 <li>The task script that reads and writes files is sh/rwfile.sh 
 <h3>References</h3>
