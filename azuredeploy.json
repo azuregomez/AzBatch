@@ -1,0 +1,202 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "deploymentPrefix": {
+            "type": "string"            
+        },
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'storage')]",
+            "metadata": {
+                "description": "Specifies the name of the File Share Storage account."
+            }
+        },
+        "batchStorageAccountName": {
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'batchstorage')]",
+            "metadata": {
+                "description": "Specifies the name of the Batch Azure Storage account."
+            }
+        },
+        "fileShareName": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'-share')]",
+            "metadata": {
+                "description": "Specifies the name of the File Share. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only."
+            }
+        },
+        "vnetName": {
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'-vnet')]",
+            "metadata": {
+                "description": "Specifies the name of the VNet."
+            }
+        },
+        "vnetAddressSpace":{
+            "type": "string",
+            "defaultValue": "10.10.0.0/16",
+            "metadata": {
+                "description": "Address space of the VNet."
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'-batch-subnet')]",
+            "metadata": {
+                "description": "Name the batch subNet."
+            }
+        },      
+        "subnetAddressSpace":{
+            "type": "string",
+            "defaultValue": "10.10.10.0/24",
+            "metadata": {
+                "description": "Address space of the batch subnet."
+            }
+        },
+        "batchAccountName": {
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'batch')]",
+            "metadata": {
+                "description": "Name of the Batch Account."
+            }
+        },
+        "appInsightsName":{
+            "type": "string",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'-appInsights')]",
+            "metadata": {
+                "description": "Name of the App Insights instance"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Specifies the location in which the Azure Storage resources should be deployed."
+            }
+        }
+    },    
+    "variables":{
+        "batchStorageSKU": "Standard_LRS",
+        "batchAppName01": "ACIInterchangeStep1"
+    },
+    "resources": [
+    {
+            "comments": "Storage Account",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "name": "[parameters('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "kind": "FileStorage",
+            "sku": {
+                "name": "Premium_LRS"                
+            },
+            "properties": {
+                "accessTier": "Hot"
+            }
+        },
+        {
+            "comments": "File Share",
+            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(parameters('storageAccountName'), '/default/', parameters('fileShareName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+            ]
+        },
+        {
+            "comments": "This storage account is used to associate to a batch account",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('batchstorageAccountname')]",
+            "apiVersion": "2019-06-01",
+            "location": "[parameters('location')]",            
+            "sku": {
+                "name": "[variables('batchStorageSKU')]"
+            },
+            "kind": "Storage",
+            "properties": {}
+        },
+        {
+            "comments": "VNet and Subnets",
+            "apiVersion": "2018-04-01",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('vnetName')]",
+            "location": "[resourcegroup().location]",        
+            "properties": {
+                "addressSpace": {
+                "addressPrefixes": [
+                "[parameters('vnetAddressSpace')]"
+                ]
+            },
+            "subnets": [
+                {
+                    "name": "[parameters('subnetName')]",
+                    "properties": {
+                        "addressPrefix": "[parameters('subnetAddressSpace')]",         
+                        "serviceEndpoints": [                 
+                            {                      
+                                "service": "Microsoft.Storage",
+                                "locations": [
+                                "[resourcegroup().location]"
+                                ]
+                            },
+                            {                      
+                                "service": "Microsoft.KeyVault",
+                                "locations": [
+                                "[resourcegroup().location]"
+                                ]
+                            }
+                        ]
+                    }
+                }                     
+            ]    
+        }        
+    },
+     {
+        "type": "Microsoft.Batch/batchAccounts",
+        "name": "[parameters('batchAccountName')]",
+        "apiVersion": "2019-04-01",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[resourceId('Microsoft.Storage/storageAccounts', parameters('batchStorageAccountName'))]"
+        ],
+        "tags": {
+            "ObjectName": "[parameters('batchAccountName')]"
+        },
+        "properties": {
+            "autoStorage": {
+            "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('batchStorageAccountName'))]"
+            }
+        },
+        "resources": [
+            {
+                "name": "[concat(parameters('batchAccountName'),'/',variables('batchAppName01'))]",
+                "type": "Microsoft.Batch/batchAccounts/applications",
+                "apiVersion": "2019-04-01",
+                "dependsOn": [
+                    "[resourceId('Microsoft.Batch/batchAccounts', parameters('batchAccountName'))]"
+                ],
+                "properties": {
+                    "displayName": "[variables('batchAppName01')]",
+                    "allowUpdates": "true"
+                },
+                "resources": []
+            }
+        ]     
+    },
+    {
+        "comments":"App Insights Instance to be used by Batch Applications",
+        "name": "[parameters('appInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "apiVersion": "2015-05-01",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "kind": "string",
+            "properties": {
+                "Application_Type": "other"
+            }
+    }
+    ]
+}

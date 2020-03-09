@@ -1,0 +1,53 @@
+{    
+    "deploymentPrefix": "<from arm template>", 
+    "poolname" :"<name of worker pool>",
+    "jobid" : "<name of job>",
+    "tasks" : [
+        { 
+            "id": "lsfiles",
+            "command": "/bin/bash -c 'ls $AZ_BATCH_NODE_MOUNTS_DIR/azfiles'"
+        },
+        {
+            "id": "env_vars",
+            "command": "printenv"
+        },
+        {
+            "id" : "helloworld",
+            "command" : "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/hello.sh World'"
+        },
+        {
+            "id" : "task1",
+            "command" : "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/rwfile.sh $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1.txt $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_1.txt'"
+        },
+        {
+            "id": "task2",
+            "command": "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/rwfile.sh $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_1.txt $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_2.txt'",
+            "dependencies" : [ 
+                { 
+                    "id" : "task1"
+                }
+            ]
+        },
+        {
+            "id": "task3",
+            "command": "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/rwfile.sh $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_1.txt $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_3.txt'",
+            "dependencies" : [ 
+                { 
+                    "id" : "task1"
+                }
+            ]
+        },
+        {
+            "id": "task4",
+            "command": "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/rwfile.sh $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_3.txt $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_4.txt'",
+            "dependencies" : [ 
+                { 
+                    "id" : "task2"
+                },
+                { 
+                    "id" : "task3"
+                }
+            ]
+        }
+    ]    
+}

@@ -1,0 +1,24 @@
+{
+    "deploymentPrefix": "<armprefix from the template>",
+    "subscriptionId": "<subscriptionId>",
+    "poolname" : "<name of pool to be created>",
+    "poolnodes" : 2,
+    "vmsku" : "<Vm Sku>",
+    "filesharedir" : "<directory on the worker nodes where Az File Share will be mapped>",
+    "azfileshareurl" : "<Azure File Share URL>",
+    "storageaccount" : "<batch storage account created in template>",
+    "accountkey": "<batch storage account keys>",
+    "applications": [
+        {
+            "name": "<app name>",
+            "version": "<app version (1.0)>",
+            "filepath": "<File path of zipped application>"
+        },
+        {
+            "name": "<app name>",
+            "version": "<app version (1.0)>",
+            "filepath": "<File path of zipped application>"
+        }
+    ],
+    "uploadApplications" : true        
+}
