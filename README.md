@@ -18,6 +18,22 @@ https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 <li>Pre-requisites: Azure Subscription, Azure Batch Explorer https://azure.github.io/BatchExplorer/
 </ul>
 <img src="https://storagegomez.blob.core.windows.net/public/images/azbatchazfiles.jpg"/>
+<h3>Solution Steps</h3>
+<img src="https://storagegomez.blob.core.windows.net/public/images/azbatchsteps.png"/>
+<table>
+<th>
+<td>Step</td>
+<td>Files</td>
+<td>Description</td>
+</th>
+<tr>
+<td>1</td>
+<td>azuredeploy.json<br>
+azuredeploy.parameters.json
+</td>
+<td>ARM Template that deploys Azure Resources: Azure Batch Account, Storage Account, File Share, VNet</td>
+</tr>
+</table>
 <h3>References</h3>
 Az Batch Powershell<br>
 https://docs.microsoft.com/en-us/azure/batch/batch-powershell-cmdlets-get-started<br>
