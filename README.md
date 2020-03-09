@@ -19,7 +19,7 @@ https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 </ul>
 <img src="https://storagegomez.blob.core.windows.net/public/images/azbatchazfiles.jpg"/>
 <h3>Solution Steps</h3>
-<img src="https://storagegomez.blob.core.windows.net/public/images/azbatchsteps.png"/>
+<img src="https://storagegomez.blob.core.windows.net/public/images/azbatchsteps.jpg"/>
 <table>
 <th>
 <td>Step</td>
