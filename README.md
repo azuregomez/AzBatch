@@ -58,6 +58,13 @@ batchjob.parameters.json
 </table>
 All tasks and scripts have to take into account the task runtime environment variables:<br>
 https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables
+<h3>The demo</h3>
+As it is provided: 
+<ul>
+<li>The pool parameter file creates a pool with 2 nodes. This is configurable.
+<li>The job parameter file is configured to do the following tasks and dependencies:
+<img src="https://storagegomez.blob.core.windows.net/public/images/tasks.jpg"/>
+<li>The task script that reads and writes files is sh/rwfile.sh 
 <h3>References</h3>
 Az Batch Powershell<br>
 https://docs.microsoft.com/en-us/azure/batch/batch-powershell-cmdlets-get-started<br>

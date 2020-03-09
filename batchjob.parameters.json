@@ -10,11 +10,7 @@
         {
             "id": "env_vars",
             "command": "printenv"
-        },
-        {
-            "id" : "helloworld",
-            "command" : "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/hello.sh World'"
-        },
+        },       
         {
             "id" : "task1",
             "command" : "/bin/bash -c '$AZ_BATCH_APP_PACKAGE_scripts_1_7/rwfile.sh $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1.txt $AZ_BATCH_NODE_MOUNTS_DIR/azfiles/file1_1.txt'"
