@@ -40,14 +40,14 @@ At the end of this template, the batch files to be processed have to be copied t
 <td>batchpool.ps1<br>
 batchpool.parameters.json
 </td>
-<td>Powershell Script that deploys a pool of worker nodes in a VNet, and copies applications and versions specofied in the parameters file. The script also mounts the Azure File Share in all the pool nodes.<td>
+<td>Powershell Script that deploys a pool of worker nodes in a VNet, and copies applications and versions specified in the parameters file. The script also mounts the Azure File Share in all the pool nodes.<td>
 </tr>
 <tr>
 <td>3</td>
 <td>batchjob.ps1<br>
 batchjob.parameters.json
 </td>
-<td>Powershell script that submits a job with tasks and dependencies. Teh job will be executed in the specified worker pool.  The parameter file includes tasks to be executed, which are usually invocations to applications installed in step 2.</td>
+<td>Powershell script that submits a job with tasks and dependencies. The job will be executed in the specified worker pool.  The parameter file includes tasks to be executed, which are usually invocations to applications installed in step 2.</td>
 </tr>
 <tr>
 <td></td>
