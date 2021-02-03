@@ -65,6 +65,9 @@ As it is provided:
 <li>The job parameter file is configured to do the following tasks and dependencies:<br/>
 <img src="https://storagegomez.blob.core.windows.net/public/images/tasks.jpg"/>
 <li>The task script that reads and writes files is sh/rwfile.sh 
+<h3>Potential improvements</h3>
+<li>Run the ps1 scripts in Azure Functions triggered by a queued message with the parameters.
+<li>Use Azure NetApp files for more predictable performance.
 <h3>References</h3>
 Az Batch Powershell<br>
 https://docs.microsoft.com/en-us/azure/batch/batch-powershell-cmdlets-get-started<br>
