@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "deploymentPrefix": {
@@ -7,9 +7,9 @@
         },
         "storageAccountName": {
             "type": "string",
-            "defaultValue": "[concat(parameters('deploymentPrefix'),'storage')]",
+            "defaultValue": "[concat(parameters('deploymentPrefix'),'datastorage')]",
             "metadata": {
-                "description": "Specifies the name of the File Share Storage account."
+                "description": "Specifies the name of the Data / File Share Storage account."
             }
         },
         "batchStorageAccountName": {

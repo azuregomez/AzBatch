@@ -3,3 +3,4 @@ azuredeploy.parameters.local.json
 batchpool.parameters.local.json
 batchjob.parameters.local.json
 azuredeploy_local.ps1
+debug.log
