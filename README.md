@@ -18,9 +18,9 @@ https://azure.microsoft.com/en-us/blog/premium-files-redefines-limits-for-azure-
 https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 <li>Pre-requisites: Azure Subscription, Azure Batch Explorer https://azure.github.io/BatchExplorer/
 </ul>
-<img src="https://storagegomez.blob.core.windows.net/public/images/azbatchazfiles.jpg"/>
+![Solution Files](https://github.com/azuregomez/azbatch/blob/master/azbatchazfiles.jpg)
 <h3>Solution Steps</h3>
-<img src="https://storagegomez.blob.core.windows.net/public/images/azbatchsteps.jpg"/>
+![Solution Steps](https://github.com/azuregomez/azbatch/blob/master/azbatchsteps.jpg)
 <table>
 <tr>
 <th>Step</th>
@@ -63,6 +63,7 @@ As it is provided:
 <ul>
 <li>The pool parameter file creates a pool with 2 nodes. This is configurable.
 <li>The job parameter file is configured to do the following tasks and dependencies:<br/>
+![Tasks](https://github.com/azuregomez/azbatch/blob/master/tasks.jpg)
 <img src="https://storagegomez.blob.core.windows.net/public/images/tasks.jpg"/>
 <li>The task script that reads and writes files is sh/rwfile.sh 
 </ul>
