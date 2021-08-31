@@ -19,48 +19,17 @@ https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 ![Solution Steps](https://github.com/azuregomez/azbatch/blob/master/azbatchsteps.jpg)
 | Step | Files | Description
 | ---- | ----- | -----------
-| 1 | azuredeploy.json | something
-<table>
-<tr>
-<th>Step</th>
-<th>Files</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>1</td>
-<td>azuredeploy.json<br>
-azuredeploy.parameters.json
-</td>
-<td>ARM Template that deploys Azure Resources: Azure Batch Account, Storage Account, File Share, VNet<br/>
-At the end of this template, the batch files to be processed have to be copied to the Azure File Share via another process or manually through the Azure Portal.  This other process can be automated and FTP can be part of it.  https://github.com/azuregomez/AFBlobSave</td>
-</tr>
-<tr>
-<td>2</td>
-<td>batchpool.ps1<br>
-batchpool.parameters.json
-</td>
-<td>Powershell Script that deploys a pool of worker nodes in a VNet, and copies applications and versions specified in the parameters file. The script also mounts the Azure File Share in all the pool nodes.<td>
-</tr>
-<tr>
-<td>3</td>
-<td>batchjob.ps1<br>
-batchjob.parameters.json
-</td>
-<td>Powershell script that submits a job with tasks and dependencies. The job will be executed in the specified worker pool.  The parameter file includes tasks to be executed, which are usually invocations to applications installed in step 2.</td>
-</tr>
-<tr>
-<td></td>
-<td>sh directory
-</td>
-<td>Sample bash scripts to be able to run this solution as a demo.  The demo executes the same script rwfile.sh that just reads and writes a file.  The batchjob.parameters.json file has a sample parameter configuration for task dependencies.</td>
-</tr>
-</table>
-All tasks and scripts have to take into account the task runtime environment variables:<br>
+| 1 | azuredeploy.json, azuredeploy.parameters.json | ARM Template that deploys Azure Resources: Azure Batch Account, Storage Account, File Share, VNet. At the end of this template, the batch files to be processed have to be copied to the Azure File Share via another process or manually through the Azure Portal.  This other process can be automated and FTP can be part of it.  https://github.com/azuregomez/AFBlobSave
+| 2 | batchpool.ps1, batchpool.parameters.json | Powershell Script that deploys a pool of worker nodes in a VNet, and copies applications and versions specified in the parameters file. The script also mounts the Azure File Share in all the pool nodes.
+| 3 | batchjob.ps1, batchjob.parameters.json | Powershell script that submits a job with tasks and dependencies. The job will be executed in the specified worker pool.  The parameter file includes tasks to be executed, which are usually invocations to applications installed in step 2.
+|  | sh directory | Sample bash scripts to be able to run this solution as a demo.  The demo executes the same script rwfile.sh that just reads and writes a file.  The batchjob.parameters.json file has a sample parameter configuration for task dependencies.
+
+All tasks and scripts have to take into account the task runtime environment variables:
 https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables
 ## Demo
 As it is provided: 
 * The pool parameter file creates a pool with 2 nodes. This is configurable.
-* The job parameter file is configured to do the following tasks and dependencies:<br/>
+* The job parameter file is configured to do the following tasks and dependencies:
 ![Tasks](https://github.com/azuregomez/azbatch/blob/master/tasks.jpg)
 * The task script that reads and writes files is sh/rwfile.sh 
 ## Potential improvements
