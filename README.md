@@ -6,7 +6,7 @@ Enterprises often have file-based, IO intensive batch processes that can move to
 * Support task dependencies
 * Have high IOPS with an SMB-based File System that is shared between all the batch worker nodes.
 ## Solution Architecture
-*To meet scalability and performance requirements and support task dependency, we will use Azure Batch:<
+* To meet scalability and performance requirements and support task dependency, we will use Azure Batch:<
 https://docs.microsoft.com/en-us/azure/batch/
 https://docs.microsoft.com/en-us/azure/batch/batch-task-dependencies
 * To meet high IOPS and a shared file system, we will use Azure Files on Premium Storage: 
@@ -15,7 +15,7 @@ https://azure.microsoft.com/en-us/blog/premium-files-redefines-limits-for-azure-
 https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 * Pre-requisites: Azure Subscription, Azure Batch Explorer https://azure.github.io/BatchExplorer/
 ![Solution Files](https://github.com/azuregomez/azbatch/blob/master/azbatchazfiles.jpg)
-<h3>Solution Steps</h3>
+## Solution Steps
 ![Solution Steps](https://github.com/azuregomez/azbatch/blob/master/azbatchsteps.jpg)
 <table>
 <tr>
