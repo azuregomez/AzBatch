@@ -25,11 +25,13 @@ https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 |  | sh directory | Sample bash scripts to be able to run this solution as a demo.  The demo executes the same script rwfile.sh that just reads and writes a file.  The batchjob.parameters.json file has a sample parameter configuration for task dependencies.
 
 All tasks and scripts have to take into account the task runtime environment variables:
+
 https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables
 ## Demo
 As it is provided: 
 * The pool parameter file creates a pool with 2 nodes. This is configurable.
 * The job parameter file is configured to do the following tasks and dependencies:
+
 ![Tasks](https://github.com/azuregomez/azbatch/blob/master/tasks.jpg)
 * The task script that reads and writes files is sh/rwfile.sh 
 ## Potential improvements
