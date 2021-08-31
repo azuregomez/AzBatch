@@ -17,6 +17,9 @@ https://docs.microsoft.com/en-us/azure/batch/batch-application-packages
 ![Solution Files](https://github.com/azuregomez/azbatch/blob/master/azbatchazfiles.jpg)
 ## Solution Steps
 ![Solution Steps](https://github.com/azuregomez/azbatch/blob/master/azbatchsteps.jpg)
+| Step | Files | Description
+| ---- | ----- | -----------
+| 1 | azuredeploy.json | something
 <table>
 <tr>
 <th>Step</th>
@@ -54,23 +57,20 @@ batchjob.parameters.json
 </table>
 All tasks and scripts have to take into account the task runtime environment variables:<br>
 https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables
-<h3>The demo</h3>
+## Demo
 As it is provided: 
-<ul>
-<li>The pool parameter file creates a pool with 2 nodes. This is configurable.
-<li>The job parameter file is configured to do the following tasks and dependencies:<br/>
+* The pool parameter file creates a pool with 2 nodes. This is configurable.
+* The job parameter file is configured to do the following tasks and dependencies:<br/>
 ![Tasks](https://github.com/azuregomez/azbatch/blob/master/tasks.jpg)
-<img src="https://storagegomez.blob.core.windows.net/public/images/tasks.jpg"/>
-<li>The task script that reads and writes files is sh/rwfile.sh 
-</ul>
-<h3>Potential improvements</h3>
-<li>Run the ps1 scripts in Azure Functions triggered by a queued message with the parameters.
-<li>Use Azure NetApp files for more predictable performance.
-<h3>References</h3>
-Az Batch Powershell<br>
-https://docs.microsoft.com/en-us/azure/batch/batch-powershell-cmdlets-get-started<br>
-https://github.com/Azure/azure-powershell/tree/master/src/Batch<br/>
-Batch Environment Variables<br/>
-https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables<br/>
-High Availability and Disaster Recovery:<br>
+* The task script that reads and writes files is sh/rwfile.sh 
+## Potential improvements
+* Run the ps1 scripts in Azure Functions triggered by a queued message with the parameters.
+* Use Azure NetApp files for more predictable performance.
+## References
+Az Batch Powershell
+https://docs.microsoft.com/en-us/azure/batch/batch-powershell-cmdlets-get-started
+https://github.com/Azure/azure-powershell/tree/master/src/Batch
+Batch Environment Variables
+https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables
+High Availability and Disaster Recovery:
 https://docs.microsoft.com/en-us/azure/batch/high-availability-disaster-recovery
